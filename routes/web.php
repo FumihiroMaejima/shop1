@@ -22,6 +22,10 @@ Route::group(['prefix' => 'student'], function(){
     Route::get('new', 'StudentController@insert');      //入力
     Route::patch('new', 'StudentController@confirm');   //確認
     Route::post('new', 'StudentController@finish');     //完了
+
+    Route::get('edit/{id}/', 'StudentController@edit');             //編集
+    Route::patch('edit/{id}/', 'StudentController@edit_confirm');   //編集確認
+    Route::post('edit/{id}/', 'StudentController@edit_finish');     //編集終了
 });
 
 
