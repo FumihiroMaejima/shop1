@@ -7,13 +7,24 @@ use Illuminate\Http\Request;
 
 class StudentController extends Controller
 {
-    public function index()
+    public function index(Request $rq)
     {
-    $query = \App\Models\Students::query();
+        // キーワード受け取り
+        $keyword = $rq->input('keyword');
 
-    //全権取得&ページネーション
-    $students = $query->orderBy('id', 'desc')->paginate(10);
-    return view('student.list')->with('students', $students);
+        // クエリ作成
+        $query = \App\Models\Students::query();
+
+        // キーワードがあるのなら
+        if(!empty($keyword))
+        {
+            $query->where('email', 'like', '%' .$keyword. '%');
+            $query->orWhere('name', 'like', '%' .$keyword. '%');
+        }
+
+        //ページネーション
+        $students = $query->orderBy('id', 'desc')->paginate(10);
+        return view('student.list')->with('students', $students)->with('keyword', $keyword);
 
     }
 
@@ -41,7 +52,7 @@ class StudentController extends Controller
         $student->save();
 
         // 一覧にリダイレクト
-        return redirect()->to('student/list');
+        return redirect()->to('student/list')->with('flashmessage', '登録が完了しました。');
 
     }
 
@@ -72,7 +83,7 @@ class StudentController extends Controller
         $student->save();
 
         // 一覧にリダイレクト
-        return redirect()->to('student/list');
+        return redirect()->to('student/list')->with('flashmessage', '更新が完了しました。');
 
     }
 
@@ -83,7 +94,7 @@ class StudentController extends Controller
         $student = \App\Models\Students::find($id);
 
         $student->delete();
-        return redirect()->to('student/list');
+        return redirect()->to('student/list')->with('flashmessage', '削除が完了しました。');
     }
 
 
