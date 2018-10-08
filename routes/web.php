@@ -26,6 +26,8 @@ Route::group(['prefix' => 'student'], function(){
     Route::get('edit/{id}/', 'StudentController@edit');             //編集
     Route::patch('edit/{id}/', 'StudentController@edit_confirm');   //編集確認
     Route::post('edit/{id}/', 'StudentController@edit_finish');     //編集終了
+
+    Route::post('delete/{id}/', 'StudentController@delete');     //削除処理
 });
 
 

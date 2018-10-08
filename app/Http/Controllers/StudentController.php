@@ -76,5 +76,15 @@ class StudentController extends Controller
 
     }
 
+        // 削除処理
+    public function delete($id)
+    {
+        // studentオブジェクトを作成
+        $student = \App\Models\Students::find($id);
+
+        $student->delete();
+        return redirect()->to('student/list');
+    }
+
 
 }
