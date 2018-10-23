@@ -11,9 +11,14 @@
 |
 */
 
+/*
 Route::get('/', function () {
     return view('welcome');
 });
+*/
+
+// DocumentRoot
+Route::get('/', 'RootController@index');
 
 //Route::get('student/list', 'StudentController@index');
 
