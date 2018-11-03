@@ -9,6 +9,7 @@
   <li><a href=""><i class="glyphicon glyphicon-menu-right"></i> submenu2</a></li>
   <li><a href=""><i class="glyphicon glyphicon-menu-right"></i> submenu3</a></li>
   <li><a href=""><i class="glyphicon glyphicon-menu-right"></i> submenu4</a></li>
+  <li><a href=""><i class="glyphicon glyphicon-menu-right"></i> submenu5</a></li>
   </ul>
   <!-- </div> -->
 </div>

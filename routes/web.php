@@ -17,6 +17,11 @@ Route::get('/', function () {
 });
 */
 
+// Auth
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
+
 // DocumentRoot
 Route::get('/', 'RootController@index');
 
