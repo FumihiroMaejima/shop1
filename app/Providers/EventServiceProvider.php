@@ -16,6 +16,11 @@ class EventServiceProvider extends ServiceProvider
         'App\Events\Event' => [
             'App\Listeners\EventListener',
         ],
+        // ログイン時にイベントを実行
+        'App\Events\Logined' => [
+            // 最終ログインを記録するリスナー
+            'App\Listeners\LastLoginListener',
+        ],
     ];
 
     /**

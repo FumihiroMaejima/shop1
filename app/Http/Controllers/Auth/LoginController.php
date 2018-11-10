@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers\Auth;
 
+use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use App\Events\Logined;
 
 class LoginController extends Controller
 {
@@ -20,6 +22,9 @@ class LoginController extends Controller
 
     use AuthenticatesUsers;
 
+    protected $maxAttempts = 3;     // ログイン試行回数(回数)
+    protected $decayMinutes = 10;   // ログインロックタイム(分)
+
     /**
      * Where to redirect users after login.
      *
@@ -35,5 +40,16 @@ class LoginController extends Controller
     public function __construct()
     {
         $this->middleware('guest')->except('logout');
+    }
+
+    /**
+     * ログイン後の処理
+     * @param Request $request
+     * @param $user
+     */
+    protected function authenticated(Request $request, $uesr)
+    {
+        // ログインイベントを発火させ、最終ログイン日時を記録する
+        event(new Logined());
     }
 }
