@@ -15,8 +15,10 @@ class DatabaseSeeder extends Seeder
 
         // 今回は不要の為、コメントアウトした
         //$this->call(StudentsTableSeeder::class);
+        //$this->call(GoodsTableSeeder::class);
 
-        $this->call(GoodsTableSeeder::class);
+        $this->call(CustomerTableSeeder::class);
+        $this->call(AdminTableSeeder::class);
     }
 }
 
