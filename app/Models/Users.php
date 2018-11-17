@@ -9,6 +9,6 @@ class Users extends Model
 {
     use SoftDeletes;
 
-    protected $talbe = 'users';
+    protected $table = 'users';
     protected $dates = ['deleted_at'];
 }
