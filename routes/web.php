@@ -67,23 +67,21 @@ Route::group(['middleware' => ['auth', 'can:system-only']], function () {
 Route::get('/', 'RootController@index');
 
 Route::group(['prefix' => 'admin'], function(){
-    Route::get('list', 'StudentController@index');      //一覧
-
-    Route::get('login', 'AdminLoginController@showAdminLoginForm')->name('admin_login');
-    Route::post('login', 'AdminLoginController@login');
-    Route::post('logout', 'AdminLoginController@logout')->name('admin_logout');
+    Route::get('login', 'Admin\Auth\LoginController@showAdminLoginForm')->name('admin_login');
+    Route::post('login', 'Admin\Auth\LoginController@login')->name('admin_login_post');
+    Route::post('logout', 'Admin\Auth\LoginController@logout')->name('admin_logout');
 
     // Registration Routes...
-    Route::get('register', 'Auth\RegisterController@showRegistrationForm')->name('register');
-    Route::post('register', 'Auth\RegisterController@register');
+    Route::get('register', 'Admin\Auth\RegisterController@showRegistrationForm')->name('admin_register');
+    Route::post('register', 'Admin\Auth\RegisterController@register')->name('admin_register_post');
 
     // Password Reset Routes...
-    Route::get('password/reset', 'Auth\ForgotPasswordController@showLinkRequestForm')->name('password.request');
-    Route::post('password/email', 'Auth\ForgotPasswordController@sendResetLinkEmail')->name('password.email');
-    Route::get('password/reset/{token}', 'Auth\ResetPasswordController@showResetForm')->name('password.reset');
-    Route::post('password/reset', 'Auth\ResetPasswordController@reset');
+    Route::get('password/reset', 'Admin\Auth\ForgotPasswordController@showLinkRequestForm')->name('admin_password_request');
+    Route::post('password/email', 'Admin\Auth\ForgotPasswordController@sendResetLinkEmail')->name('admin_password_email');
+    Route::get('password/reset/{token}', 'Admin\Auth\ResetPasswordController@showResetForm')->name('password.reset');
+    Route::post('password/reset', 'Admin\Auth\ResetPasswordController@reset');
 
-    Route::get('home', 'HomeController@index')->name('home');
+    Route::get('home', 'Admin\HomeController@index')->name('admin_home');
 });
 
 Route::group(['prefix' => 'student'], function(){

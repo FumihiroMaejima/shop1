@@ -1,24 +1,15 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin\Auth;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use App\Events\Logined;
+use Illuminate\Support\Facades\Auth;
 
-class AdminLoginController extends Controller
+class LoginController extends Controller
 {
-    /**
-     * Show the application dashboard.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        return view('admin.home');
-    }
-
     /*
     |--------------------------------------------------------------------------
     | Login Controller
@@ -31,11 +22,6 @@ class AdminLoginController extends Controller
     */
 
     use AuthenticatesUsers;
-
-    public function showAdminLoginForm()
-    {
-        return view('admin.login');
-    }
 
     protected $maxAttempts = 3;     // ログイン試行回数(回数)
     protected $decayMinutes = 10;   // ログインロックタイム(分)
@@ -54,12 +40,17 @@ class AdminLoginController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('guest')->except('logout');
+        $this->middleware('guest:admin')->except('logout');
     }
 
     public function guard()
     {
-        return \Auth::guard('admin');
+        return Auth::guard('admin');
+    }
+
+    public function showAdminLoginForm()
+    {
+        return view('admin.login');
     }
 
     /**
