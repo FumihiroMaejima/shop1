@@ -5,6 +5,8 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use App\Notifications\OriginalPasswordReset;
+use Illuminate\Support\Facades\Password;
 
 class Admin extends Authenticatable
 {
@@ -29,4 +31,25 @@ class Admin extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    /**
+     *パスワードリセットに使われるブローカの取得
+    *
+    * @return PasswordBroker
+    */
+    protected function broker()
+    {
+        return Password::broker('admin');
+    }
+
+    /**
+     * パスワードリセット通知の送信
+     *
+     * @param  string  $token
+     * @return void
+     */
+    public function sendPasswordResetNotification($token)
+    {
+        $this->notify(new OriginalPasswordReset($token));
+    }
 }

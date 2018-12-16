@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin\Auth;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\SendsPasswordResetEmails;
+use Illuminate\Support\Facades\Password;
 
 class ForgotPasswordController extends Controller
 {
@@ -44,4 +45,15 @@ class ForgotPasswordController extends Controller
     {
         return view('admin.passwords.email');
     }
+
+    /**
+     *パスワードリセットに使われるブローカの取得
+    *
+    * @return PasswordBroker
+    */
+    protected function broker()
+    {
+        return Password::broker('admin');
+    }
+
 }

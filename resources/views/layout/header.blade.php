@@ -1,5 +1,5 @@
 <!-- header & grobal navi -->
-<nav class="navbar navbar-default" style="background-color: #f5f5dc;">
+<nav class="navbar navbar-default" style="background-color: #8fbc8f;">
   <div class="container-fluid">
   <div class="navbar-header">
   <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbarEexample2">
