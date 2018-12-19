@@ -50,6 +50,25 @@ Route::group(['prefix' => 'admin'], function(){
     Route::get('home', 'Admin\HomeController@index')->name('admin_home');
 });
 
+// customer ユーザーのルーティング
+Route::group(['prefix' => 'customer'], function(){
+    Route::get('login', 'Customer\Auth\LoginController@showAdminLoginForm')->name('customer_login');
+    Route::post('login', 'Customer\Auth\LoginController@login')->name('customer_login_post');
+    Route::post('logout', 'Customer\Auth\LoginController@logout')->name('customer_logout');
+
+    // Registration Routes...
+    Route::get('register', 'Customer\Auth\RegisterController@showRegistrationForm')->name('customer_register');
+    Route::post('register', 'Customer\Auth\RegisterController@register')->name('customer_register_post');
+
+    // Password Reset Routes...
+    Route::get('password/reset', 'Customer\Auth\ForgotPasswordController@showLinkRequestForm')->name('customer_password_request');
+    Route::post('password/email', 'Customer\Auth\ForgotPasswordController@sendResetLinkEmail')->name('customer_password_email');
+    Route::get('password/reset/{token}', 'Customer\Auth\ResetPasswordController@showResetForm')->name('customer_password_reset');
+    Route::post('password/reset', 'Customer\Auth\ResetPasswordController@reset')->name('customer_password_reset_post');
+
+    Route::get('home', 'Customer\HomeController@index')->name('customer_home');
+});
+
 Route::group(['prefix' => 'student'], function(){
     Route::get('list', 'StudentController@index');      //一覧
     Route::get('new', 'StudentController@insert');      //入力
