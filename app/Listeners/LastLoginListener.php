@@ -41,6 +41,15 @@ class LastLoginListener
             // 保存
             $admin->save();
         }
+        else if($request_url == "/customer/login")
+        {
+            $email = $_POST['email'];
+            // クエリ
+            $admin = \App\Models\Customer::where('email',$email)->first();
+            $admin->last_login_at = Carbon::now();
+            // 保存
+            $admin->save();
+        }
         else
         {
             // userテーブルを使った最終ログイン時刻の書き込み

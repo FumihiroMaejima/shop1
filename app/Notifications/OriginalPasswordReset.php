@@ -47,6 +47,13 @@ class OriginalPasswordReset extends Notification
      */
     public function toMail($notifiable)
     {
+        $request_url = $_SERVER['REQUEST_URI'];
+        if($request_url == "/customer/password/email"){
+            return (new MailMessage)
+                        ->subject(__('Reset Password'))
+                        ->view('emails.password_reset')
+                        ->action(__('Reset Password'), url('customer/password/reset', $this->token));
+        }
         return (new MailMessage)
                     ->subject(__('Reset Password'))
                     ->view('emails.password_reset')

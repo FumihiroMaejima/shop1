@@ -10,6 +10,8 @@ use Illuminate\Support\Facades\Password;
 
 class Customer extends Authenticatable
 {
+    use Notifiable;
+
     protected $table = 'customer';
     public $timestamps = true;
 

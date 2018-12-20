@@ -65,6 +65,9 @@ class Handler extends ExceptionHandler
         if (in_array('admin', $exception->guards())) {
             return redirect()->guest(route('admin_login'));
         }
+        if (in_array('customer', $exception->guards())) {
+            return redirect()->guest(route('customer_login'));
+        }
         return redirect()->guest(route('login'));
     }
 }

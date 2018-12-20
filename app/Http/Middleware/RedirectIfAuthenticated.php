@@ -23,6 +23,9 @@ class RedirectIfAuthenticated
             case "admin":
                 $redir ='/admin/home';
                 break;
+            case "customer":
+                $redir ='/customer/home';
+                break;
             default:
                 $redir ='/home';
                 break;

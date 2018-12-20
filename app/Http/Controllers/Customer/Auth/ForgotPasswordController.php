@@ -1,9 +1,10 @@
 <?php
 
-namespace App\Http\Controllers\Auth;
+namespace App\Http\Controllers\Customer\Auth;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\SendsPasswordResetEmails;
+use Illuminate\Support\Facades\Password;
 
 class ForgotPasswordController extends Controller
 {
@@ -27,6 +28,32 @@ class ForgotPasswordController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('guest');
+        $this->middleware('guest:customer');
     }
+
+    public function guard()
+    {
+        return Auth::guard('customer');
+    }
+
+    /**
+     * Display the form to request a password reset link.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function showLinkRequestForm()
+    {
+        return view('customer.passwords.email');
+    }
+
+    /**
+     *パスワードリセットに使われるブローカの取得
+    *
+    * @return PasswordBroker
+    */
+    protected function broker()
+    {
+        return Password::broker('customer');
+    }
+
 }
