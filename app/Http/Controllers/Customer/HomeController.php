@@ -22,8 +22,24 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        return view('customer.home');
+        // キーワード受け取り
+        $keyword = $request->input('keyword');
+        // クエリ作成
+        $query = \App\Models\Goods::query();
+
+        // キーワードがあるのなら
+        if(!empty($keyword))
+        {
+            $query->where('goods_code', 'like', '%' .$keyword. '%');
+            $query->orWhere('goods_name', 'like', '%' .$keyword. '%');
+        }
+
+        //ページネーション
+        $all_goods = $query->orderBy('id', 'asc')->paginate(10);
+        //return view('root')->with('all_goods', $all_goods)->with('keyword', $keyword);
+
+        return view('customer.home')->with('all_goods', $all_goods)->with('keyword', $keyword);
     }
 }

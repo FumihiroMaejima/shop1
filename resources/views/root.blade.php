@@ -6,23 +6,20 @@
 
 @endsection
 @section('content')
- <div class="row" style="margin-bottom:30px;">
-    <div class="form-group">
-         <form method="get" action="" class="form-inline">
-             <div class="form-group">
-                 <input type="text" name="keyword" class="form-control" value="{{$keyword}}" placeholder="検索キーワード">
-             </div>
-             <input type="submit" value="検索" class="btn btn-info">
-         </form>
-    </div>
-    <div class="col-sm-2">
-         <a href="/student/new" class="btn btn-warning"><i class="glyphicon glyphicon-plus"></i>&nbsp;&nbsp;新規追加</a>
+<div class="row" style="margin-bottom:30px;">
+    <div class="col-sm-6">
+        <form method="get" action="" class="form-inline">
+            <div class="form-group">
+                <input type="text" name="keyword" class="form-control" value="{{$keyword}}" placeholder="検索キーワード">
+            </div>
+            <input type="submit" value="検索" class="btn btn-info">
+        </form>
     </div>
     <div class="col-sm-3">
-         <a href="/" class="btn btn-primary"><i class="glyphicon glyphicon-user"></i>&nbsp;&nbsp;会員様はこちら</a>
+        <a href="/customer/login" class="btn btn-primary"><i class="glyphicon glyphicon-user"></i>&nbsp;&nbsp;会員様はこちら</a>
     </div>
-    <div class="col-sm-2">
-         <a href="/" class="btn btn-primary"><i class="glyphicon glyphicon-wrench"></i>&nbsp;&nbsp;管理画面へ</a>
+    <div class="col-sm-3">
+        <a href="/customer/register" class="btn btn-warning"><i class="glyphicon glyphicon-plus"></i>&nbsp;&nbsp;新規会員登録はこちら</a>
     </div>
 </div>
 
