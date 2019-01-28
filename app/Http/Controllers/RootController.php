@@ -22,6 +22,6 @@ class RootController extends Controller
 
         //ページネーション
         $all_goods = $query->orderBy('id', 'asc')->paginate(10);
-        return view('root')->with('all_goods', $all_goods)->with('keyword', $keyword);
+        return view('top.home')->with('all_goods', $all_goods)->with('keyword', $keyword);
     }
 }

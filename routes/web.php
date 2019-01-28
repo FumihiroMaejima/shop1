@@ -29,9 +29,10 @@ Route::post('password/reset', 'Auth\ResetPasswordController@reset');
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-// adminユーザーのルーティング
+
 Route::get('/', 'RootController@index');
 
+// adminユーザーのルーティング
 Route::group(['prefix' => 'admin'], function(){
     Route::get('login', 'Admin\Auth\LoginController@showAdminLoginForm')->name('admin_login');
     Route::post('login', 'Admin\Auth\LoginController@login')->name('admin_login_post');
