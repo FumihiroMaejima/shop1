@@ -19,11 +19,11 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-    <style>body{background-color: #efefdd;}</style>
+    <style>body{background-color: #c5d295;}</style>
 </head>
 <body>
     <div id="app">
-        <nav class="navbar navbar-expand-md navbar-light navbar-laravel">
+        <nav class="navbar navbar-expand-md navbar-light navbar-laravel" style="background-color: #eae1c2;">
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/') }}">
                     {{ config('app.name', 'Laravel') }}
@@ -43,10 +43,13 @@
                         <!-- Authentication Links -->
                         @guest
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ route('admin_login') }}">{{ __('Login') }}</a>
+                                <a class="nav-link" href="{{ route('admin_login') }}">{{ __('Admin Login') }}</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ route('admin_register') }}">{{ __('Register') }}</a>
+                                <a class="nav-link" href="{{ route('customer_login') }}">{{ __('Customer Login') }}</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('customer_register') }}">{{ __('Customer Register') }}</a>
                             </li>
                         @else
                             <li class="nav-item dropdown">
@@ -55,13 +58,13 @@
                                 </a>
 
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="{{ route('admin_logout') }}"
+                                    <a class="dropdown-item" href="{{ route('customer_logout') }}"
                                        onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
                                         {{ __('Logout') }}
                                     </a>
 
-                                    <form id="logout-form" action="{{ route('admin_logout') }}" method="POST" style="display: none;">
+                                    <form id="logout-form" action="{{ route('customer_logout') }}" method="POST" style="display: none;">
                                         @csrf
                                     </form>
                                 </div>

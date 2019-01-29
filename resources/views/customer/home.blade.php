@@ -31,7 +31,7 @@
 
                     <table class="table table-striped table-hover">
                         <thead>
-                            <tr>
+                            <tr style="text-align:right;">
                                 <th>商品No</th>
                                 <th>商品コード</th>
                                 <th>商品名</th>
@@ -40,7 +40,7 @@
                                 <th>買い物option</th>
                             </tr>
                         </thead>
-                        <tbody>
+                        <tbody style="text-align:right;">
                             @foreach($all_goods as $goods)
                                 <tr>
                                     <td>{{$goods->id}}</td>

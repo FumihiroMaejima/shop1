@@ -16,7 +16,7 @@
 
                     You are logged in!
 
-                    <div class="col-sm-6" tyle="margin-bottom:5px;">
+                    <div class="col-sm-6" style="margin-bottom:5px;">
                         <form method="get" action="" class="form-inline">
                             <div class="form-group">
                                 <input type="text" name="keyword" class="form-control" value="{{$keyword}}" placeholder="検索キーワード">
@@ -27,7 +27,7 @@
 
                     <table class="table table-striped table-hover">
                         <thead>
-                            <tr>
+                            <tr style="text-align:right;">
                                 <th>商品No</th>
                                 <th>商品コード</th>
                                 <th>商品名</th>
@@ -36,7 +36,7 @@
                                 <th>opration</th>
                             </tr>
                         </thead>
-                        <tbody>
+                        <tbody style="text-align:right;">
                             @foreach($all_goods as $goods)
                                 <tr>
                                     <td>{{$goods->id}}</td>
