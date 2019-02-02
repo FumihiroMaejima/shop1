@@ -12,6 +12,7 @@ class Admin extends Authenticatable
 {
     use Notifiable;
 
+    //テーブル名
     protected $table = 'admin';
     public $timestamps = true;
 

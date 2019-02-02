@@ -19,11 +19,56 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-    <style>body{background-color: #8fbc8f;}</style>
+    <style>
+        body{background-color: #8fa887;}
+
+        .navbar-brand{
+            font-family: Comic Sans MS;
+        }
+
+        #admin_login,#admin_register,#navbarDropdown {
+            color: #fff;
+            /*padding: 5%;*/
+            padding: 10%, 5%;
+            /*width: 180px;*/
+            /*height: 180px;*/
+            /*margin: 0 -15px;*/
+            margin: 0 15px;
+            mix-blend-mode: multiply;
+        }
+
+        #admin_login {
+            background: #f66;
+            border-radius: 50% 50% 50% 70%/50% 50% 70% 60%;
+        }
+
+        #admin_register {
+            background: #fc2;
+            border-radius: 40% 40% 50% 40%/30% 50% 50% 50%;
+        }
+        @media (max-width: 770px) {
+            #admin_login,#admin_register {
+                color: #fff;
+                /*padding: 5%;*/
+                padding: 10%, 5%;
+                width: 150px;
+                /*height: 180px;*/
+                /*margin: 0 -15px;*/
+                margin: 0 15px;
+                mix-blend-mode: multiply;
+                text-align: center;
+            }
+        }
+        #navbarDropdown{
+            background: #f66;
+            border-radius: 50% 50% 50% 70%/50% 50% 70% 60%;
+        }
+
+    </style>
 </head>
 <body>
     <div id="app">
-        <nav class="navbar navbar-expand-md navbar-light navbar-laravel">
+        <nav class="navbar navbar-expand-md navbar-light navbar-laravel" style="background-color: #eae1c2;">
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/') }}">
                     {{ config('app.name', 'Laravel') }}
@@ -43,10 +88,10 @@
                         <!-- Authentication Links -->
                         @guest
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ route('admin_login') }}">{{ __('Login') }}</a>
+                                <a class="nav-link" id="admin_login" href="{{ route('admin_login') }}">{{ __('Login') }}</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ route('admin_register') }}">{{ __('Register') }}</a>
+                                <a class="nav-link" id="admin_register" href="{{ route('admin_register') }}">{{ __('Register') }}</a>
                             </li>
                         @else
                             <li class="nav-item dropdown">
@@ -55,12 +100,14 @@
                                 </a>
 
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                                    <a class="dropdown-item" href="{{ route('admin_regist_index') }}">
+                                        {{ __('Goods Regist') }}
+                                    </a>
                                     <a class="dropdown-item" href="{{ route('admin_logout') }}"
                                        onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
                                         {{ __('Logout') }}
                                     </a>
-
                                     <form id="logout-form" action="{{ route('admin_logout') }}" method="POST" style="display: none;">
                                         @csrf
                                     </form>

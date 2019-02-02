@@ -42,4 +42,34 @@ class HomeController extends Controller
 
         return view('admin.home')->with('all_goods', $all_goods)->with('keyword', $keyword);
     }
+
+    // 商品登録画面
+    public function registIndex()
+    {
+        return view('admin.goods.regist.index');
+    }
+
+    // 商品登録確認画面
+    public function registConfirm($id)
+    {
+        // goodsオブジェクトを作成
+        $goods = \App\Models\Goods::findOrFail($id);
+        return view('admin.goods.regist.index')->with('goods', $goods);
+    }
+
+    // 商品情報編集画面
+    public function editIndex(Request $request, $id)
+    {
+        // goodsオブジェクトを作成
+        $goods = \App\Models\Goods::findOrFail($id);
+        return view('admin.goods.edit.index')->with('goods', $goods);
+    }
+
+    // 商品情報編集確認画面
+    public function editConfirm(Request $request, $id)
+    {
+        // goodsオブジェクトを作成
+        $goods = \App\Models\Goods::findOrFail($id);
+        return view('admin.goods.edit.index')->with('goods', $goods);
+    }
 }

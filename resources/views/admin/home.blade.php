@@ -31,7 +31,6 @@
                                 <th>商品No</th>
                                 <th>商品コード</th>
                                 <th>商品名</th>
-                                <th>規格</th>
                                 <th>価格</th>
                                 <th>opration</th>
                             </tr>
@@ -42,11 +41,10 @@
                                     <td>{{$goods->id}}</td>
                                     <td>{{$goods->goods_code}}</td>
                                     <td>{{$goods->goods_name}}</td>
-                                    <td>{{$goods->standard}}</td>
                                     <td>{{$goods->price}}円</td>
                                     <td>
                                         <!-- <a href="" class="btn btn-primary btn-sm">詳細</a> -->
-                                        <a href="/admin/edit/{{$goods->id}}" class="btn btn-primary btn-sm">編集</a>
+                                        <a href="/admin/goods/edit/{{$goods->id}}" class="btn btn-primary btn-sm">編集</a>
                                     </td>
                                     <td>
                                         <form action="/admin/delete/{{$goods->id}}" method="POST">

@@ -35,7 +35,6 @@
                                 <th>商品No</th>
                                 <th>商品コード</th>
                                 <th>商品名</th>
-                                <th>規格</th>
                                 <th>価格</th>
                                 <th>買い物option</th>
                             </tr>
@@ -46,7 +45,6 @@
                                     <td>{{$goods->id}}</td>
                                     <td>{{$goods->goods_code}}</td>
                                     <td>{{$goods->goods_name}}</td>
-                                    <td>{{$goods->standard}}</td>
                                     <td>{{$goods->price}}円</td>
                                     <td>
                                         <!-- <a href="" class="btn btn-primary btn-sm">詳細</a> -->

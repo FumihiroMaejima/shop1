@@ -19,7 +19,53 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-    <style>body{background-color: #c5d295;}</style>
+    <style>
+        body{background-color: #c5d295;}
+
+        .navbar-brand{
+            font-family: Comic Sans MS;
+        }
+
+        #admin_login,#customer_login,#customer_register {
+            color: #fff;
+            /*padding: 5%;*/
+            padding: 10%, 5%;
+            /*width: 180px;*/
+            /*height: 180px;*/
+            /*margin: 0 -15px;*/
+            margin: 0 15px;
+            mix-blend-mode: multiply;
+        }
+
+        #admin_login {
+            background: #f66;
+            border-radius: 50% 50% 50% 70%/50% 50% 70% 60%;
+        }
+
+        #customer_login {
+            background: #f92;
+            border-radius: 80% 30% 50% 50%/50%;
+        }
+
+        #customer_register {
+            background: #fc2;
+            border-radius: 40% 40% 50% 40%/30% 50% 50% 50%;
+        }
+        @media (max-width: 770px) {
+            #admin_login,#customer_login,#customer_register {
+                color: #fff;
+                /*padding: 5%;*/
+                padding: 10%, 5%;
+                width: 150px;
+                /*height: 180px;*/
+                /*margin: 0 -15px;*/
+                margin: 0 15px;
+                mix-blend-mode: multiply;
+                text-align: center;
+            }
+        }
+
+    </style>
 </head>
 <body>
     <div id="app">
@@ -43,13 +89,13 @@
                         <!-- Authentication Links -->
                         @guest
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ route('admin_login') }}">{{ __('Admin Login') }}</a>
+                                <a class="nav-link" id="admin_login" href="{{ route('admin_login') }}">{{ __('Admin Login') }}</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ route('customer_login') }}">{{ __('Customer Login') }}</a>
+                                <a class="nav-link" id="customer_login" href="{{ route('customer_login') }}">{{ __('Customer Login') }}</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ route('customer_register') }}">{{ __('Customer Register') }}</a>
+                                <a class="nav-link" id="customer_register" href="{{ route('customer_register') }}">{{ __('Customer Register') }}</a>
                             </li>
                         @else
                             <li class="nav-item dropdown">

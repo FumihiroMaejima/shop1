@@ -19,11 +19,57 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-    <style>body{background-color: #efefdd;}</style>
+    <style>
+        body{background-color: #c5d295;}
+
+        .navbar-brand{
+            font-family: Comic Sans MS;
+        }
+
+        #customer_login,#customer_register,#navbarDropdown {
+            color: #fff;
+            /*padding: 5%;*/
+            padding: 10%, 5%;
+            /*width: 180px;*/
+            /*height: 180px;*/
+            /*margin: 0 -15px;*/
+            margin: 0 15px;
+            mix-blend-mode: multiply;
+        }
+
+        #customer_login {
+            background: #f92;
+            border-radius: 80% 30% 50% 50%/50%;
+        }
+
+        #customer_register {
+            background: #fc2;
+            border-radius: 40% 40% 50% 40%/30% 50% 50% 50%;
+        }
+        @media (max-width: 770px) {
+            #admin_login,#customer_login,#customer_register {
+                color: #fff;
+                /*padding: 5%;*/
+                padding: 10%, 5%;
+                width: 150px;
+                /*height: 180px;*/
+                /*margin: 0 -15px;*/
+                margin: 0 15px;
+                mix-blend-mode: multiply;
+                text-align: center;
+            }
+        }
+
+        #navbarDropdown{
+            background: #f92;
+            border-radius: 50% 50% 50% 70%/50% 50% 70% 60%;
+        }
+
+    </style>
 </head>
 <body>
     <div id="app">
-        <nav class="navbar navbar-expand-md navbar-light navbar-laravel">
+        <nav class="navbar navbar-expand-md navbar-light navbar-laravel" style="background-color: #eae1c2;">
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/') }}">
                     {{ config('app.name', 'Laravel') }}
@@ -43,10 +89,10 @@
                         <!-- Authentication Links -->
                         @guest
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ route('customer_login') }}">{{ __('Login') }}</a>
+                                <a class="nav-link" id="customer_login" href="{{ route('customer_login') }}">{{ __('Login') }}</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ route('customer_register') }}">{{ __('Register') }}</a>
+                                <a class="nav-link" id="customer_register" href="{{ route('customer_register') }}">{{ __('Register') }}</a>
                             </li>
                         @else
                             <li class="nav-item dropdown">

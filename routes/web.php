@@ -49,6 +49,14 @@ Route::group(['prefix' => 'admin'], function(){
     Route::post('password/reset', 'Admin\Auth\ResetPasswordController@reset')->name('admin_password_reset_post');
 
     Route::get('home', 'Admin\HomeController@index')->name('admin_home');
+
+
+    // 商品登録画面
+    Route::get('goods/regist', 'Admin\HomeController@registIndex')->name('admin_regist_index');
+    Route::patch('goods/regist/confirm', 'Admin\HomeController@registConfirm')->name('admin_regist_confirm');
+    // 商品編集画面
+    Route::get('goods/edit/{id}/', 'Admin\HomeController@editIndex')->name('admin_edit_index');
+    Route::patch('goods/edit/{id}/confirm', 'Admin\HomeController@editConfirm')->name('admin_edit_confirm');
 });
 
 // customer ユーザーのルーティング
@@ -83,7 +91,7 @@ Route::group(['prefix' => 'student'], function(){
     Route::post('delete/{id}/', 'StudentController@delete');     //削除処理
 });
 
-// 送信メール本文のプレビュー(画面の身のテスト)
+// 送信メール本文のプレビュー(画面のみのテスト)
 Route::get('sample/mailable/preview', function () {
     return new App\Mail\SampleNotification($name='テスト', $text='テストです。');
 });
