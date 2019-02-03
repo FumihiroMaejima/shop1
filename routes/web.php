@@ -53,7 +53,9 @@ Route::group(['prefix' => 'admin'], function(){
 
     // 商品登録画面
     Route::get('goods/regist', 'Admin\HomeController@registIndex')->name('admin_regist_index');
-    Route::patch('goods/regist/confirm', 'Admin\HomeController@registConfirm')->name('admin_regist_confirm');
+    Route::patch('goods/confirm', 'Admin\HomeController@registConfirm')->name('admin_regist_confirm');
+    Route::post('goods/input', 'Admin\HomeController@registFinish')->name('admin_regist_input');
+    Route::post('goods/upload', 'Admin\HomeController@uploadGoodsImage')->name('admin_upload_image');
     // 商品編集画面
     Route::get('goods/edit/{id}/', 'Admin\HomeController@editIndex')->name('admin_edit_index');
     Route::patch('goods/edit/{id}/confirm', 'Admin\HomeController@editConfirm')->name('admin_edit_confirm');
