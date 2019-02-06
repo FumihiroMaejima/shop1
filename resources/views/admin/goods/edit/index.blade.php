@@ -14,42 +14,65 @@
                         </div>
                     @endif
 
-                    Input Goods Data!
+                    Edit Goods Data!
+
+                    <form method="POST" action="{{ route('admin_edit_confirm') }}" >
+                        {{ csrf_field() }}
+                        {{ method_field('patch') }}
+                        <input type="hidden" name="goods_id" value="{{$goods->id}}">
+
+                        <div class="form-group row" style="margin-top:10px;">
+                            <label for="goods_name" class="col-md-3 col-form-label text-md-left">{{ __('商品名') }}<small style="color:#ff0000;">【必須】</small></label>
+
+                            <div class="col-md-7">
+                                <input id="goods_name" type="text" class="form-control{{ $errors->has('goods_name') ? ' is-invalid' : '' }}" name="goods_name" value="{{ $goods->goods_name }}" maxlength="50" required autofocus>
+                                <small class="input_condidion">*最大50文字</small>
+
+                                @if ($errors->has('goods_name'))
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $errors->first('goods_name') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="price" class="col-md-3 col-form-label text-md-left">{{ __('価格') }}<small style="color:#ff0000;">【必須】</small></label>
+
+                            <div class="col-md-7">
+                                <input id="price" type="text" class="form-control{{ $errors->has('price') ? ' is-invalid' : '' }}" name="price" value="{{ $goods->price }}" required autofocus>
+                                <small class="input_condidion">*半角数字1~999999(円)以内</small>
+
+                                @if ($errors->has('price'))
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $errors->first('price') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="goods_text" class="col-md-3 col-form-label text-md-left">{{ __('商品説明文') }}</label>
+
+                            <div class="col-md-7">
+                                <textarea class="form-control{{ $errors->has('goods_text') ? ' is-invalid' : '' }}" name="goods_text" rows="4" cols="30" maxlength="120" placeholder="説明文を入力してください。">{{ $goods->goods_text }}</textarea>
+                                <small class="input_condidion">*最大120文字</small>
+
+                                @if ($errors->has('goods_text'))
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $errors->first('goods_text') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                        </div>
 
 
-
-                    <form>
-                        <table class="table table-striped table-hover">
-                            <thead>
-                                <tr style="text-align:right;">
-                                    <th>商品データ</th>
-                                    <th>入力値</th>
-                                </tr>
-                            </thead>
-                            <tbody style="text-align:right;">
-                                    <tr>
-                                        <td>商品コード</td>
-                                        <td><input type="text" name="goods_code" value="{{$goods->goods_code}}"></td>
-                                    </tr>
-                                    <tr>
-                                        <td>商品名</td>
-                                        <td><input type="text" name="goods_name" value="{{$goods->goods_name}}"></td>
-                                    </tr>
-                                    <tr>
-                                        <td>価格</td>
-                                        <td>¥<input type="text" name="price" value="{{$goods->price}}"></td>
-                                    </tr>
-                                    <tr>
-                                        <td>イメージ</td>
-                                        <td><input type="file" name="goods_image" value=""></td>
-                                    </tr>
-                            </tbody>
-                        </table>
                         <div class="col-md-offset-3 text-center">
                             <a class="btn btn-primary" href="/admin/home">戻る</a>
                             <input type="submit" class="btn btn-success" value="確認">
                         </div>
                     </form>
+
                 </div>
                 <div class="card-footer">Dashboard-footer</div>
             </div>

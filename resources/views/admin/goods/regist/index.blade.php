@@ -5,7 +5,7 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">Administrator: Regist New Goods Dashboard</div>
+                <div class="card-header">Administrator Regist New Goods Dashboard</div>
 
                 <div class="card-body">
                     @if (session('status'))
@@ -45,23 +45,6 @@
                                 @if ($errors->has('price'))
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $errors->first('price') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
-                        </div>
-
-                        <div class="form-group row">
-                            <label for="goods_image" class="col-md-3 col-form-label text-md-left">{{ __('イメージ') }}</label>
-
-                            <div class="col-md-7">
-                                <input type="file" class="form-control{{ $errors->has('goods_image') ? ' is-invalid' : '' }}" name="goods_image" value="{{ old('goods_image') }}" style="border:none;padding-left:0.0rem;" >
-                                <small class="input_condidion">*jpg,png形式のみ</small></br>
-                                <small class="input_condidion">*最小画像サイズ:縦横100px</small></br>
-                                <small class="input_condidion">*最大画像サイズ:縦横600px</small>
-
-                                @if ($errors->has('goods_image'))
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $errors->first('goods_image') }}</strong>
                                     </span>
                                 @endif
                             </div>

@@ -101,7 +101,7 @@
                 <h4 class="modal-title">Goods Image Upload</h4>
             </div>
             <div class="modal-body">
-                <form method="POST" action="{{ route('admin_upload_image') }}" enctype=”multipart/form-data” >
+                <form method="POST" action="{{ route('admin_upload_image') }}" enctype='multipart/form-data'>
                     {{ csrf_field() }}
                     <input type="hidden" input="select_id" name="select_id" value="">
 
@@ -109,7 +109,7 @@
                         <label for="goods_image" class="col-md-3 col-form-label text-md-left">{{ __('イメージ') }}</label>
 
                         <div class="col-md-7">
-                            <input type="file" class="form-control{{ $errors->has('goods_image') ? ' is-invalid' : '' }}" name="goods_image" value="{{ old('goods_image') }}" style="border:none;padding-left:0.0rem;" >
+                            <input type="file" class="" name="goods_image" value="{{ old('goods_image') }}" style="border:none;padding-left:0.0rem;" >
                             <small class="input_condidion">*jpg,png形式のみ</small></br>
                             <small class="input_condidion">*最小画像サイズ:縦横100px</small></br>
                             <small class="input_condidion">*最大画像サイズ:縦横600px</small>

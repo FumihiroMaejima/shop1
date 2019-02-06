@@ -32,10 +32,10 @@
                                 <th>商品コード</th>
                                 <th>商品名</th>
                                 <th>価格</th>
-                                <th>opration</th>
+                                <th>イメージ</th>
                             </tr>
                         </thead>
-                        <tbody style="text-align:right;">
+                        <tbody style="text-align:center;">
                             @foreach($all_goods as $goods)
                                 <tr>
                                     <td>{{$goods->id}}</td>
@@ -45,12 +45,11 @@
                                     <td>
                                         <!-- <a href="" class="btn btn-primary btn-sm">詳細</a> -->
                                         <!-- <a href="/admin/edit/{{$goods->id}}" class="btn btn-primary btn-sm">編集</a> -->
-                                    </td>
-                                    <td>
-                                        <form action="/admin/delete/{{$goods->id}}" method="POST">
-                                            {{ csrf_field() }}
-                                            <input type=submit value="削除" class="btn btn-danger btn-sm btn-dell">
-                                        </form>
+                                        @if($goods->image_name)
+                                            <img src="{{ asset('storage/goods/' . $goods->id . '/' . $goods->image_name) }}" width="40" height="40" alt="no_goods_image" />
+                                        @else
+                                            <p>--------</p>
+                                        @endif
                                     </td>
                                 </tr>
                             @endforeach

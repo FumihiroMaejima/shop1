@@ -63,7 +63,6 @@ class HomeController extends Controller
     // 商品登録確認画面
     public function registConfirm(\App\Http\Requests\CheckGoodsRequest $request)
     {
-
         // リクエストデータを取得(配列)
         $data = $request->all();
         //dd($data);
@@ -79,7 +78,6 @@ class HomeController extends Controller
         // ランダムな商品コードの作成(random_bytes()関数を使う)
         $random_goods_code  = str_random(6);
         // 画像名と説明文の取得
-        $tmp_image_name = $request->image_name;
         $tmp_goods_text = $request->goods_text;
 
         // 値の登録
@@ -88,13 +86,9 @@ class HomeController extends Controller
         $new_goods->standard = "1";
         $new_goods->price = $request->price;
         $new_goods->maker = "test maker";
-        if(isset($tmp_image_name)){
-            $new_goods->image_name = $tmp_image_name;
-        }
         if(isset($tmp_goods_text)){
             $new_goods->goods_text = $tmp_goods_text;
         }
-
         // 保存(DBに登録)
         $new_goods->save();
 
@@ -107,16 +101,13 @@ class HomeController extends Controller
     // 商品登録確認画面
     public function uploadGoodsImage(Request $request)
     {
-        dd(var_dump($_FILES));
-        /*
-        echo var_dump($_FILES);
-
-        dd($request);
-        */
-        $file = $request->input('goods_image');
-        // 登録対処の商品ID
+        // 選択した商品IDの取得
         $select_id = $request->input('select_id');
-        $upload_data = $request->input('goods_image');
+        // アップロードしたファイル名を取得
+        $upload_name = $_FILES['goods_image']['name'];
+
+        // アップロードするディレクトリ名を指定
+        $up_dir = 'goods/' . $select_id;
 
         // アップロードしたファイルのバリデーション設定
         $this->validate($request, [
@@ -133,31 +124,28 @@ class HomeController extends Controller
                 'dimensions:min_width=100,min_height=100,max_width=600,max_height=600',
             ]
         ]);
-dd($request);
-        if ($request->input('goods_image')->isValid([])) {
-            $filename = $request->file->store('public/storage');
 
-            $goods = \App\Models\Goods::findOrFail($id);
-            $goods->image_name = $upload_data;
+        //アップロードに成功しているか確認
+        if ($request->file('goods_image')->isValid([])) {
+            //$filename = $request->file->store('public/avatar');
+            $filename = $request->file('goods_image')->storeAs($up_dir, $upload_name, 'public');
+
+            // DBへファイル名登録処理
+            $goods = \App\Models\Goods::findOrFail($select_id);
+            //  $filenameだとパスが含まれてしまう為、basename()で囲う
+            $goods->image_name = basename($filename);
             // 更新(差分があればDBに登録)
             $goods->save();
+
+            return redirect()->to('admin/home')->with('flashmessage', 'イメージ画像の登録が完了しました。');
         }
-
-
-        //$file = $request->file('goods_image');
-        /*
-        if($request->hasFile('goods_image')){
-             dd($upload_data);
+        else{
+            return redirect()->to('admin/home')->with('flashmessage', 'イメージ画像の登録に失敗しました。');
         }
-        */
-
-
-        //dd($data);
-        redirect()->to('admin/home')->with('flashmessage', 'イメージ画像の登録が完了しました。');
     }
 
     // 商品情報編集画面
-    public function editIndex(Request $request, $id)
+    public function editIndex($id)
     {
         // goodsオブジェクトを作成
         $goods = \App\Models\Goods::findOrFail($id);
@@ -165,10 +153,13 @@ dd($request);
     }
 
     // 商品情報編集確認画面
-    public function editConfirm(\App\Http\Requests\CheckGoodsRequest $request, $id)
+    public function editConfirm(\App\Http\Requests\CheckGoodsRequest $request)
     {
+        $goods_id = $request->input('goods_id');
+        // リクエストデータを取得(配列)
+        $data = $request->all();
         // goodsオブジェクトを作成
-        $goods = \App\Models\Goods::findOrFail($id);
-        return view('admin.goods.edit.index')->with('goods', $goods);
+        $goods = \App\Models\Goods::findOrFail($goods_id);
+        return view('admin.goods.regist.confirm')->with('data', $data);
     }
 }

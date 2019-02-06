@@ -57,8 +57,9 @@ Route::group(['prefix' => 'admin'], function(){
     Route::post('goods/input', 'Admin\HomeController@registFinish')->name('admin_regist_input');
     Route::post('goods/upload', 'Admin\HomeController@uploadGoodsImage')->name('admin_upload_image');
     // 商品編集画面
-    Route::get('goods/edit/{id}/', 'Admin\HomeController@editIndex')->name('admin_edit_index');
+    Route::get('goods/edit/{id}', 'Admin\HomeController@editIndex')->name('admin_edit_index');
     Route::patch('goods/edit/{id}/confirm', 'Admin\HomeController@editConfirm')->name('admin_edit_confirm');
+    Route::post('goods/edit/{id}/input', 'Admin\HomeController@editFinish')->name('admin_edit_input');
 });
 
 // customer ユーザーのルーティング
