@@ -18,10 +18,11 @@
 
 
 
-                    <form method="POST" action="{{ route('admin_regist_input') }}" aria-label="{{ __('admin_regist_input') }}">
+                    <form method="POST" action="{{ route('admin_edit_input', $data['goods_id'] ) }}" aria-label="{{ __('admin_regist_input') }}">
                         {{ csrf_field() }}
+                        <input type="hidden" name="goods_id" value="{{ $data['goods_id'] }}">
                         @foreach($data as $key => $goods_data)
-                            @if(!($key == "_token") && !($key == "_method"))
+                            @if(!($key == "_token") && !($key == "_method") && !($key == "goods_id"))
                                 <input type="hidden" name="{{$key}}" value="{{$goods_data}}">
                                 <div class="form-group row">
                                     <label for="{{$key}}" class="col-md-4 col-form-label text-md-right">
@@ -42,7 +43,7 @@
                                 @break
                                 @default
                             @endswitch
-                            @if(!($key == "_token") && !($key == "_method"))
+                            @if(!($key == "_token") && !($key == "_method") && !($key == "goods_id"))
                                     </label>
                                     <label for="{{$key}}" class="col-md-8 col-form-label text-md-left">
                                         @if(isset($goods_data))
@@ -57,7 +58,7 @@
 
 
                         <div class="col-md-offset-3 text-center">
-                            <a class="btn btn-primary" href="/admin/goods/regist">戻る</a>
+                            <a class="btn btn-primary" href="/admin/goods/edit/{{ $data['goods_id'] }}">戻る</a>
                             <input type="submit" class="btn btn-success" value="登録する">
                         </div>
                     </form>

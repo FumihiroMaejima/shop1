@@ -16,10 +16,10 @@
 
                     Edit Goods Data!
 
-                    <form method="POST" action="{{ route('admin_edit_confirm') }}" >
+                    <form method="POST" action="{{ route('admin_edit_confirm', $goods->id) }}" >
                         {{ csrf_field() }}
                         {{ method_field('patch') }}
-                        <input type="hidden" name="goods_id" value="{{$goods->id}}">
+                        <input type="hidden" name="goods_id" value="{{ $goods->id }}">
 
                         <div class="form-group row" style="margin-top:10px;">
                             <label for="goods_name" class="col-md-3 col-form-label text-md-left">{{ __('商品名') }}<small style="color:#ff0000;">【必須】</small></label>
