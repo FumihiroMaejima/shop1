@@ -76,9 +76,9 @@
                                         <a id="upload_{{$goods->goods_code}}" name="upload_img" href="javascript:uploadImage({{$goods->id}})" class="btn btn-primary btn-sm" >画像</a>
                                     </td>
                                     <td>
-                                        <form action="/admin/goods/delete/{{$goods->id}}" method="POST">
+                                        <form action="{{ route('admin_goods_delete', $goods->id) }}" method="POST">
                                             {{ csrf_field() }}
-                                            <input type=submit value="削除" class="btn btn-danger btn-sm btn-dell">
+                                            <input type=submit class="btn btn-danger btn-sm btn-dell" value="削除">
                                         </form>
                                     </td>
                                 </tr>
@@ -145,6 +145,19 @@
 
         $('#upload_modal').modal('show');
     }
+
+    $(function(){
+        $(".btn-dell").click(function(){
+            if(confirm("本当に削除しますか？")){
+                // そのまま削除を実行
+            }
+            else{
+                return false;
+            }
+        });
+    });
+
+</script>
 
 </script>
 

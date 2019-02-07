@@ -60,6 +60,9 @@ Route::group(['prefix' => 'admin'], function(){
     Route::get('goods/edit/{id}', 'Admin\HomeController@editIndex')->name('admin_edit_index');
     Route::patch('goods/edit/{id}/confirm', 'Admin\HomeController@editConfirm')->name('admin_edit_confirm');
     Route::post('goods/edit/{id}/input', 'Admin\HomeController@editFinish')->name('admin_edit_input');
+    // 商品削除
+    Route::post('goods/delete/{id}', 'Admin\HomeController@delete')->name('admin_goods_delete');
+
 });
 
 // customer ユーザーのルーティング

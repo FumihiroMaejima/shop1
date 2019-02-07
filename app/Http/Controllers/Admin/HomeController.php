@@ -179,4 +179,16 @@ class HomeController extends Controller
             return redirect()->to('admin/home')->with('flashmessage', '送信したデータが不正です。');
         }
     }
+
+        // goods削除処理
+    public function delete($id)
+    {
+        // goodsオブジェクトを作成
+        $goods = \App\Models\Goods::find($id);
+
+
+        // 削除実行
+        $goods->delete();
+        return redirect()->to('admin/home')->with('flashmessage', '削除が完了しました。');
+    }
 }
