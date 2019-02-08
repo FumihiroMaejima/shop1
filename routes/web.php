@@ -82,6 +82,12 @@ Route::group(['prefix' => 'customer'], function(){
     Route::post('password/reset', 'Customer\Auth\ResetPasswordController@reset')->name('customer_password_reset_post');
 
     Route::get('home', 'Customer\HomeController@index')->name('customer_home');
+
+    // カートへの格納処理
+    Route::post('goods/cart/input/{id}', 'Customer\HomeController@cartInput')->name('customer_cart_input');
+    Route::post('goods/cart/delete/{id}', 'Customer\HomeController@cartDelete')->name('customer_cart_delete');
+    // 決済確認画面
+    Route::post('goods/cart/payment/confirm', 'Customer\HomeController@paymentConfirm')->name('customer_payment_confirm');
 });
 
 Route::group(['prefix' => 'student'], function(){

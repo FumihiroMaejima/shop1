@@ -18,7 +18,7 @@
 
 
 
-                    <form method="POST" action="{{ route('admin_edit_input', $data['goods_id'] ) }}" aria-label="{{ __('admin_regist_input') }}">
+                    <form method="POST" action="{{ route('admin_edit_input', $data['goods_id'] ) }}" aria-label="{{ __('admin_edit_input') }}">
                         {{ csrf_field() }}
                         <input type="hidden" name="goods_id" value="{{ $data['goods_id'] }}">
                         @foreach($data as $key => $goods_data)
