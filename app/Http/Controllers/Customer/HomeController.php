@@ -5,6 +5,9 @@ namespace App\Http\Controllers\Customer;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
+use Stripe\Stripe;
+use Stripe\Customer;
+use Stripe\Charge;
 
 class HomeController extends Controller
 {
@@ -57,38 +60,6 @@ class HomeController extends Controller
         // セッションの'cart'キーに、商品のIDと個数を格納する
         // 複数回同じボタンを押したらその分数が増える
         session()->increment('cart.' . $goods_id, 1);
-        //session()->increment('cart.' . $request->code, $request->qty);
-        //session()->put(['cart_goods' => $target_goods]);
-        //session()->put(['goods_id'=> $test1,'goods_name'=>$test2]);
-
-        //dd($request->session());
-        //dd($request);
-        /*
-        // 存在チェック
-        if ($req->session()->has('name')) {
-
-        }
-        // 'name' というセッションキーに 'TEST' をセット
-        $req->session()->put('name', 'TEST');
-        // フォームからの name 属性をセッションに保存する場合
-        $req->session()->put('name', $req->input('name'));
-        // セッション「name」の値を取得
-        $name = $req->session()->get('name');
-        // セッションの値を全て取得
-        $data = $req->session()->all();
-        // 指定アイテムを削除
-        $req->session()->forget('key');
-        // 全て削除
-        $request->session()->flush();
-        // キー／値ペアの配列を渡し、値を設定することができます。
-        session(['chairs' => 7, 'instruments' => 3]);
-        // セッションへデータを保存する
-        session(['key1' => 'value1', 'key2' => ‘value2 ']);
-        session()->put([' key1 ' => ' value1 ', ' key2 ' => ' value2 ']);
-        // 指定したデータをセッションから取得後、そのデータを削除する
-        $value = session()->pull('key', 'default');
-         */
-
 
         // customerホームにリダイレクト
         // flashmessage(モーダル表示用のセッション変数)
@@ -109,10 +80,17 @@ class HomeController extends Controller
             // 選択した商品がカート内にあるかの確認
             $exist_this_goods = array_key_exists($goods_id, $select_goods_data);
             if ($exist_this_goods) {
-                session()->decrement('cart.' . $goods_id, 1);
+
+                $current_num = $select_goods_data[$goods_id];
+                if($current_num != 0){
+                    session()->decrement('cart.' . $goods_id, 1);
 
                 // customerホームにリダイレクト
-                return redirect()->to('customer/home')->with('flashmessage', '選択した商品をカートから1つ外しました。');
+                    return redirect()->to('customer/home')->with('flashmessage', '選択した商品をカートから1つ外しました。');
+                }
+                else{
+                    return redirect()->to('customer/home')->with('flashmessage', '選択した商品はカート内に存在しません。');
+                }
             } else {
                 return redirect()->to('customer/home')->with('flashmessage', '選択した商品はカート内に存在しません。');
             }
@@ -152,10 +130,41 @@ class HomeController extends Controller
                 }
             }
             // データをviewに渡す
-            return view('customer.cart.confirm')->with('customer', $customer)->with('confirm_goods_data', $confirm_goods_data);
+            return view('customer.cart.test5')->with('customer', $customer)->with('confirm_goods_data', $confirm_goods_data);
+            //return view('customer.cart.test4');
+            //return view('customer.cart.test');
+            //return view('customer.cart.confirm')->with('customer', $customer)->with('confirm_goods_data', $confirm_goods_data);
         }
         else{
             return redirect()->to('customer/home')->with('flashmessage', 'カート内に商品が存在しません。');
+        }
+    }
+
+    // 単発決済処理
+    public function paymentExec(Request $request)
+    {
+        //dd($request);
+        try{
+            Stripe::setApiKey(env('STRIPE_SECRET_KEY'));
+
+            $customer = Customer::create(array(
+                'email' => $request->stripeEmail,
+                'source' => $request->stripeToken
+            ));
+
+            $charge = Charge::create(array(
+                'customer' => $customer->id,
+                'amount' => 1000,
+                'currency' => 'jpy',
+            ));
+
+            // カート情報の削除
+            $request->session()->forget('cart');
+
+            // ホーム画面にリダイレクト
+            return redirect()->to('customer/home')->with('flashmessage', '決済が完了しました。');
+        }catch(Exception $e){
+            return $e->getMessage();
         }
     }
 }

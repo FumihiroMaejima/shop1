@@ -2,6 +2,7 @@
 
 @section('content')
 <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.min.js"></script>
+
 @if(Session::has('flashmessage'))
     <script>
         $(window).load(function(){
@@ -41,7 +42,8 @@
 
                     Confirm Cart Data!
 
-                    <form action="" method="POST">
+                    <form action="{{ route('customer_payment_exec') }}" method="POST">
+                        {{ csrf_field() }}
                         <input type="hidden" name="customer_id" value="{{$customer->id}}">
                         <table class="table table-striped table-hover">
                             <thead>
@@ -73,7 +75,17 @@
                         </table>
                         <div class="col-md-offset-3 text-center">
                             <a class="btn btn-primary" href="/customer/home">戻る</a>
-                            <input type="submit" class="btn btn-success" value="決済する">
+                            <script
+                                    src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+                                    data-key="{{ env('STRIPE_PUBLIC_KEY') }}"
+                                    data-amount="1000"
+                                    data-name="Stripe Demo"
+                                    data-label="決済をする"
+                                    data-description="Online course about integrating Stripe"
+                                    data-image="https://stripe.com/img/documentation/checkout/marketplace.png"
+                                    data-locale="auto"
+                                    data-currency="JPY">
+                            </script>
                         </div>
                     </form>
                 </div>

@@ -159,6 +159,4 @@
 
 </script>
 
-</script>
-
 @endsection

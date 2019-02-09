@@ -88,6 +88,7 @@ Route::group(['prefix' => 'customer'], function(){
     Route::post('goods/cart/delete/{id}', 'Customer\HomeController@cartDelete')->name('customer_cart_delete');
     // 決済確認画面
     Route::post('goods/cart/payment/confirm', 'Customer\HomeController@paymentConfirm')->name('customer_payment_confirm');
+    Route::post('goods/cart/payment/exec', 'Customer\HomeController@paymentExec')->name('customer_payment_exec');
 });
 
 Route::group(['prefix' => 'student'], function(){
