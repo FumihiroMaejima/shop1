@@ -130,10 +130,7 @@ class HomeController extends Controller
                 }
             }
             // データをviewに渡す
-            return view('customer.cart.test5')->with('customer', $customer)->with('confirm_goods_data', $confirm_goods_data);
-            //return view('customer.cart.test4');
-            //return view('customer.cart.test');
-            //return view('customer.cart.confirm')->with('customer', $customer)->with('confirm_goods_data', $confirm_goods_data);
+            return view('customer.cart.confirm')->with('customer', $customer)->with('confirm_goods_data', $confirm_goods_data);
         }
         else{
             return redirect()->to('customer/home')->with('flashmessage', 'カート内に商品が存在しません。');

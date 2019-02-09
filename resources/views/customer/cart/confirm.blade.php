@@ -1,4 +1,4 @@
-@extends('layouts.customer')
+@extends('layouts.payment')
 
 @section('content')
 <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.min.js"></script>
@@ -79,9 +79,9 @@
                                     src="https://checkout.stripe.com/checkout.js" class="stripe-button"
                                     data-key="{{ env('STRIPE_PUBLIC_KEY') }}"
                                     data-amount="1000"
-                                    data-name="Stripe Demo"
+                                    data-name="EC Shop"
                                     data-label="決済をする"
-                                    data-description="Online course about integrating Stripe"
+                                    data-description="Online shopping by Stripe"
                                     data-image="https://stripe.com/img/documentation/checkout/marketplace.png"
                                     data-locale="auto"
                                     data-currency="JPY">
