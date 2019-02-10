@@ -117,6 +117,8 @@ class HomeController extends Controller
 
             // 画面に表示する商品データ格納用の変数
             $confirm_goods_data = array();
+            // 画面に表示する合計価格の格納用の変数
+            $total_cost = 0;
 
             // 商品詳細データとカート内の個数との紐付け
             foreach ($select_goods_data as $goods_id => $num) {
@@ -127,10 +129,24 @@ class HomeController extends Controller
                     $confirm_goods_data[$goods_id] = $goods;
                     // 各商品のカート内個数を格納
                     $confirm_goods_data[$goods_id]['input_num'] = $num;
+
+                    // 各商品の価格
+                    $tmp_goods_price = $goods->price;
+                    // 合計価格に加算
+                    $total_cost = $total_cost + ($tmp_goods_price * $num);
                 }
             }
-            // データをviewに渡す
-            return view('customer.cart.confirm')->with('customer', $customer)->with('confirm_goods_data', $confirm_goods_data);
+            // 商品のデータが取れない(カートに商品が含まれていない)場合
+            if(empty($confirm_goods_data)){
+                // セッションからカート情報の削除(商品情報が含まれていない為)
+                $request->session()->forget('cart');
+                return redirect()->to('customer/home')->with('flashmessage', 'カート内に商品が存在しません。');
+            }
+            else{
+                // データをviewに渡す
+                return view('customer.cart.confirm')->with('customer', $customer)->with('confirm_goods_data', $confirm_goods_data)->with('total_cost', $total_cost);
+            }
+
         }
         else{
             return redirect()->to('customer/home')->with('flashmessage', 'カート内に商品が存在しません。');
@@ -140,7 +156,8 @@ class HomeController extends Controller
     // 単発決済処理
     public function paymentExec(Request $request)
     {
-        //dd($request);
+        // 合計価格
+        $total_cost = $request->input('total_cost');
         try{
             Stripe::setApiKey(env('STRIPE_SECRET_KEY'));
 
@@ -151,7 +168,7 @@ class HomeController extends Controller
 
             $charge = Charge::create(array(
                 'customer' => $customer->id,
-                'amount' => 1000,
+                'amount' => $total_cost,
                 'currency' => 'jpy',
             ));
 

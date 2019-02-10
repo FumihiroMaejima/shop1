@@ -45,6 +45,7 @@
                     <form action="{{ route('customer_payment_exec') }}" method="POST">
                         {{ csrf_field() }}
                         <input type="hidden" name="customer_id" value="{{$customer->id}}">
+                        <input type="hidden" name="total_cost" value="{{$total_cost}}">
                         <table class="table table-striped table-hover">
                             <thead>
                                 <tr style="text-align:right;">
@@ -71,6 +72,7 @@
                                         <td>{{$goods->input_num}}個</td>
                                     </tr>
                                 @endforeach
+                                <tr style="text-align:right;"><td></td><td></td><td></td><td></td><td>合計価格:{{$total_cost}}</td></tr>
                             </tbody>
                         </table>
                         <div class="col-md-offset-3 text-center">
@@ -78,7 +80,7 @@
                             <script
                                     src="https://checkout.stripe.com/checkout.js" class="stripe-button"
                                     data-key="{{ env('STRIPE_PUBLIC_KEY') }}"
-                                    data-amount="1000"
+                                    data-amount="{{$total_cost}}"
                                     data-name="EC Shop"
                                     data-label="決済をする"
                                     data-description="Online shopping by Stripe"
