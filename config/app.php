@@ -150,6 +150,7 @@ return [
         /*
          * Package Service Providers...
          */
+        Olssonm\VeryBasicAuth\VeryBasicAuthServiceProvider::class,
 
         /*
          * Application Service Providers...

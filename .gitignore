@@ -13,4 +13,4 @@ yarn-error.log
 .env
 .phpunit.result.cache
 .sql
-/app/config/very_basic_auth.php
+/config/very_basic_auth.php

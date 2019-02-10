@@ -12,7 +12,9 @@
 */
 
 // トップページ
-Route::get('/', 'RootController@index');
+Route::group(['middleware' => 'auth.very_basic'], function () {
+    Route::get('/', 'RootController@index');
+});
 
 // adminユーザーのルーティング
 Route::group(['prefix' => 'admin'], function(){

@@ -2,7 +2,7 @@
 <html lang="ja">
 <head>
   <meta charset="UTF-8">
-  <title>403 Forbidden</title>
+  <title>405 Method Not Allowed</title>
   <style>
     .error-wrap {
       padding: 5px 20px;
@@ -17,7 +17,7 @@
 <body>
   <div class="error-wrap">
     <section>
-      <h1>403 Forbidden</h1>
+      <h1>405 Method Not Allowed</h1>
       <p>You can not have access.</p>
     </section>
   </div>
