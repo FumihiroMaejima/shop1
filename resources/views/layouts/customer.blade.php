@@ -71,7 +71,11 @@
     <div id="app">
         <nav class="navbar navbar-expand-md navbar-light navbar-laravel" style="background-color: #eae1c2;">
             <div class="container">
-                <a class="navbar-brand" href="{{ url('/') }}">
+                @guest
+                    <a class="navbar-brand" href="{{ url('/') }}">
+                @else
+                    <a class="navbar-brand" href="{{ url('/') }}" onclick="event.preventDefault();document.getElementById('logout-form').submit();">
+                @endguest
                     {{ config('app.name', 'Laravel') }}
                 </a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
@@ -101,6 +105,9 @@
                                 </a>
 
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                                    <a class="dropdown-item" href="{{ route('customer_home') }}">
+                                        {{ __('Customer Home') }}
+                                    </a>
                                     <a class="dropdown-item" href="{{ route('customer_logout') }}"
                                        onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">

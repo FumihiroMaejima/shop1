@@ -11,25 +11,7 @@
 |
 */
 
-// Auth
-//Auth::routes();
-Route::get('login', 'Auth\LoginController@showLoginForm')->name('login');
-Route::post('login', 'Auth\LoginController@login');
-Route::post('logout', 'Auth\LoginController@logout')->name('logout');
-
-// Registration Routes...
-Route::get('register', 'Auth\RegisterController@showRegistrationForm')->name('register');
-Route::post('register', 'Auth\RegisterController@register');
-
-// Password Reset Routes...
-Route::get('password/reset', 'Auth\ForgotPasswordController@showLinkRequestForm')->name('password.request');
-Route::post('password/email', 'Auth\ForgotPasswordController@sendResetLinkEmail')->name('password.email');
-Route::get('password/reset/{token}', 'Auth\ResetPasswordController@showResetForm')->name('password.reset');
-Route::post('password/reset', 'Auth\ResetPasswordController@reset');
-
-Route::get('/home', 'HomeController@index')->name('home');
-
-
+// トップページ
 Route::get('/', 'RootController@index');
 
 // adminユーザーのルーティング
@@ -48,6 +30,7 @@ Route::group(['prefix' => 'admin'], function(){
     Route::get('password/reset/{token}', 'Admin\Auth\ResetPasswordController@showResetForm')->name('admin_password_reset');
     Route::post('password/reset', 'Admin\Auth\ResetPasswordController@reset')->name('admin_password_reset_post');
 
+    // 管理画面ホーム
     Route::get('home', 'Admin\HomeController@index')->name('admin_home');
 
 
@@ -81,29 +64,18 @@ Route::group(['prefix' => 'customer'], function(){
     Route::get('password/reset/{token}', 'Customer\Auth\ResetPasswordController@showResetForm')->name('customer_password_reset');
     Route::post('password/reset', 'Customer\Auth\ResetPasswordController@reset')->name('customer_password_reset_post');
 
+    // ユーザー画面ホーム
     Route::get('home', 'Customer\HomeController@index')->name('customer_home');
 
     // カートへの格納処理
-    Route::post('goods/cart/input/{id}', 'Customer\HomeController@cartInput')->name('customer_cart_input');
-    Route::post('goods/cart/delete/{id}', 'Customer\HomeController@cartDelete')->name('customer_cart_delete');
+    Route::post('cart/input/{id}', 'Customer\HomeController@cartInput')->name('customer_cart_input');
+    Route::post('cart/delete/{id}', 'Customer\HomeController@cartDelete')->name('customer_cart_delete');
     // 決済確認画面
-    Route::post('goods/cart/payment/confirm', 'Customer\HomeController@paymentConfirm')->name('customer_payment_confirm');
-    Route::post('goods/cart/payment/exec', 'Customer\HomeController@paymentExec')->name('customer_payment_exec');
+    Route::post('cart/payment/confirm', 'Customer\HomeController@paymentConfirm')->name('customer_payment_confirm');
+    Route::post('cart/payment/exec', 'Customer\HomeController@paymentExec')->name('customer_payment_exec');
 });
 
-Route::group(['prefix' => 'student'], function(){
-    Route::get('list', 'StudentController@index');      //一覧
-    Route::get('new', 'StudentController@insert');      //入力
-    Route::patch('new', 'StudentController@confirm');   //確認
-    Route::post('new', 'StudentController@finish');     //完了
-
-    Route::get('edit/{id}/', 'StudentController@edit');             //編集
-    Route::patch('edit/{id}/', 'StudentController@edit_confirm');   //編集確認
-    Route::post('edit/{id}/', 'StudentController@edit_finish');     //編集終了
-
-    Route::post('delete/{id}/', 'StudentController@delete');     //削除処理
-});
-
+/*
 // 送信メール本文のプレビュー(画面のみのテスト)
 Route::get('sample/mailable/preview', function () {
     return new App\Mail\SampleNotification($name='テスト', $text='テストです。');
@@ -111,3 +83,4 @@ Route::get('sample/mailable/preview', function () {
 
 // メール機能テスト
 Route::get('sample/mailable/send', 'MailController@SampleNotification');
+*/
