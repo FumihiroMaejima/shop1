@@ -53,8 +53,9 @@
 
                         <div class="form-group row mb-0">
                             <div class="col-md-8 offset-md-4">
+                                <a class="btn btn-primary" href="/">戻る</a>
                                 <button type="submit" class="btn btn-primary">
-                                    {{ __('Login') }}
+                                    {{ __('ログイン') }}
                                 </button>
 
                                 <a class="btn btn-link" href="{{ route('customer_password_request') }}">

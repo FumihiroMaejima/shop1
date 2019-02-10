@@ -90,9 +90,6 @@
                             <li class="nav-item">
                                 <a class="nav-link" id="admin_login" href="{{ route('admin_login') }}">{{ __('Login') }}</a>
                             </li>
-                            <li class="nav-item">
-                                <a class="nav-link" id="admin_register" href="{{ route('admin_register') }}">{{ __('Register') }}</a>
-                            </li>
                         @else
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
@@ -100,6 +97,12 @@
                                 </a>
 
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                                    <a class="dropdown-item" href="{{ route('admin_home') }}">
+                                        {{ __('Admin Home') }}
+                                    </a>
+                                    <a class="dropdown-item" href="{{ route('admin_register') }}">
+                                        {{ __('Admin Regist') }}
+                                    </a>
                                     <a class="dropdown-item" href="{{ route('admin_regist_index') }}">
                                         {{ __('Goods Regist') }}
                                     </a>
