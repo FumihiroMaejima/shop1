@@ -13,7 +13,7 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h4 class="modal-title">New Goods Registed</h4>
+                    <h4 class="modal-title">Goods Management</h4>
                 </div>
                 <div class="modal-body">
                     {{ session('flashmessage') }}

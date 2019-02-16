@@ -27,3 +27,4 @@ jobs:
           paths:
             - vendor
       - run: echo 'Cache made.'
+      - run: vendor/bin/phpcs --standard=phpcs.xml --extensions=php .
